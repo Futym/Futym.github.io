@@ -1,27 +1,31 @@
 import Axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 export const Excuses = () => {
-  const [excuse, setExcuse] = useState("");
+  const [excuseType, setExcuseType] = useState("office");
+  const { data: excuseObj, refetch } = useQuery({
+    queryKey: ["excuse"],
+    queryFn: () => {
+      return Axios.get(
+        `https://excuser-three.vercel.app/v1/excuse/${excuseType}/`
+      ).then((res) => res.data[0]);
+    },
+  });
 
   const handlePartyExcuse = () => {
-    fetchExcuse("party");
+    setExcuseType("party");
+    refetch();
   };
 
   const handleFamilyExcuse = () => {
-    fetchExcuse("family");
+    setExcuseType("family");
+    refetch();
   };
 
   const handleOfficeExcuse = () => {
-    fetchExcuse("office");
-  };
-
-  const fetchExcuse = (excuseType) => {
-    Axios.get(`https://excuser-three.vercel.app/v1/excuse/${excuseType}/`).then(
-      (res) => {
-        setExcuse(res.data[0].excuse);
-      }
-    );
+    setExcuseType("office");
+    refetch();
   };
 
   return (
@@ -30,7 +34,7 @@ export const Excuses = () => {
       <button onClick={handlePartyExcuse}>Party</button>
       <button onClick={handleFamilyExcuse}>Family</button>
       <button onClick={handleOfficeExcuse}>Office</button>
-      <p>{excuse}</p>
+      <p>{excuseObj?.excuse}</p>
     </div>
   );
 };
