@@ -1,44 +1,27 @@
 import "./App.css";
 import { ContactForm } from "./ContactForm";
-import { Project } from "./Project";
-
-const projects = [
-  {
-    title: "ToDo List",
-    description: "This is todo list project",
-    technologies: "React.js",
-    isProjectReady: false,
-  },
-  {
-    title: "Snake",
-    description: "This is snake like game",
-    technologies: "Python",
-    isProjectReady: true,
-  },
-  {
-    title: "Tic-Tac-Toe",
-    description: "Simple locally played Tic-Tac-Toe",
-    technologies: "Python",
-    isProjectReady: true,
-  },
-];
+import { Projects } from "./Projects";
+import { About } from "./About";
+import { Excuses } from "./Excuses";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {
+
+
   return (
     <div className="App">
-      {projects.map((project, key) => {
-        return (
-          project.isProjectReady && (
-            <Project
-              key={key}
-              title={project.title}
-              description={project.description}
-              technologies={project.technologies}
-            />
-          )
-        );
-      })}
-      <ContactForm />
+      <Router>
+        <Link to="/">Home</Link>
+        <Link to="/contact">Contact</Link>
+        <Link to="/projects">Projects</Link>
+        <Link to="/excuses">Excuses</Link>
+        <Routes>
+          <Route path="/" element={<About/>}/>
+          <Route path="/contact" element={<ContactForm/>}/>
+          <Route path="/projects" element={<Projects/>}/>
+          <Route path="/excuses" element={<Excuses />}/>
+        </Routes>
+      </Router>
     </div>
   );
 }
