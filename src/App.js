@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Page404 } from "./Page404";
 import { NavBar } from "./NavBar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RandomIconGenerator } from "./RandomIconGenerator";
 
 function App() {
   const client = new QueryClient({
@@ -19,6 +20,7 @@ function App() {
 
   return (
     <div className="App">
+      <RandomIconGenerator />
       <QueryClientProvider client={client}>
         <Router>
           <NavBar />

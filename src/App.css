@@ -1,8 +1,10 @@
 .App {
   text-align: center;
-  background: rgb(120, 0, 156);
+  background: rgb(0, 62, 72);
   height: 100vh;
-  padding:0
+  padding:0;
+  position:relative;
+  z-index:0;
 }
 
 .App-header {
