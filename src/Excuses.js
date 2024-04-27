@@ -6,7 +6,7 @@ export const Excuses = () => {
   const [excuseType, setExcuseType] = useState("office");
   const { data: excuseObj, refetch } = useQuery({
     queryKey: ["excuse"],
-    queryFn: () => {
+    queryFn: async () => {
       return Axios.get(
         `https://excuser-three.vercel.app/v1/excuse/${excuseType}/`
       ).then((res) => res.data[0]);
